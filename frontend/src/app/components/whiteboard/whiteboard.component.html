@@ -1,0 +1,100 @@
+<h2>Narišite svoje pohištvo</h2>
+
+<div class="mb-3">
+   <button mat-mini-fab
+           (click)='setSelection("brush")'
+           matTooltip="Pisalo"
+           matTooltipPosition="above"
+           [ngClass]="{'border border-2 border-primary': selectedButton['brush']}"
+           aria-label="Pisalo">
+      <i class="fa fa-pen fa-xl"
+         aria-hidden="true">
+      </i>
+   </button>
+   &nbsp;
+   <button mat-mini-fab
+           (click)='clearBoard()'
+           matTooltip="Počisti"
+           matTooltipPosition="above"
+           aria-label="Počisti">
+      <i class="fa fa-broom fa-xl"
+         aria-hidden="true">
+      </i>
+   </button>
+   &nbsp;
+   <button mat-mini-fab
+           (click)='setSelection("eraser")'
+           matTooltip="Briši"
+           matTooltipPosition="above"
+           [ngClass]="{'border border-2 border-primary': selectedButton['eraser']}"
+           aria-label="Briši">
+      <i class="fa fa-eraser fa-xl"
+         aria-hidden="true">
+      </i>
+   </button>
+   &nbsp;
+   <button mat-mini-fab
+           (click)='downloadSketch()'
+           matTooltip="Prenesi skico"
+           matTooltipPosition="above"
+           aria-label="Prenesi skico">
+      <i class="fa fa-file-arrow-down fa-xl"
+         aria-hidden="true">
+      </i>
+   </button>
+   &nbsp;
+   <button mat-mini-fab
+           (click)='toggleDragging()'
+           matTooltip="Povleci skico"
+           matTooltipPosition="above"
+           [ngClass]="{'border border-2 border-primary': stageDraggable}"
+           aria-label="Povleci skico">
+      <i class="fa fa-hand fa-xl"
+         aria-hidden="true">
+      </i>
+   </button>
+</div>
+
+<div class="text-center d-flex justify-content-center">
+
+   <div id="container"
+        class="border border-1 border-warning shadow"
+        style="height: 410px; width: 410px"
+        [ngClass]="getCursorClass()"></div>
+
+   <br>
+   <div class="border border-1 border-warning shadow">
+      <img [src]="imageSource"
+           alt="Image Source"
+           *ngIf="imageSource"
+           height="400px"
+           width="400px">
+   </div>
+</div>
+
+<br>
+<div class="text-center d-flex justify-content-center">
+   <div class="col-md-2">
+      <input class="form-control shadow"
+             accept="image/png, image/jpeg"
+             type="file"
+             (change)="onUploadSketch($event)">
+   </div>
+   <div class="col-md-1">
+      <i *ngIf="loadSpinner"
+         class="fas fa-spinner fa-pulse fa-2xl text-warning"></i>
+   </div>
+   <div class="col-md-2">
+      <ng-select class="shadow"
+                 bindLabel="name"
+                 [searchable]="false"
+                 [(ngModel)]="selectedFurniture"
+                 [items]="furniture">
+         <ng-template ng-label-tmp
+                      let-item="item">
+            <b>{{item.name}}</b>
+         </ng-template>
+
+      </ng-select>
+   </div>
+</div>
