@@ -1,8 +1,9 @@
 import os.path
+import random
+
 from data.base_dataset import BaseDataset, get_transform
 from data.image_folder import make_dataset
 from PIL import Image
-import random
 
 
 class UnalignedDataset(BaseDataset):
@@ -71,6 +72,10 @@ class UnalignedDataset(BaseDataset):
             noise_path = A_path
 
         patchnoiseA_path = self.A_paths[index_patchnoiseA]
+        index_ref = random.randint(0, self.B_size - 1)
+        ref_path = self.B_paths[index_ref]
+        ref_img = Image.open(ref_path).convert('RGB')
+        ref_img = self.transform_B(ref_img)
 
         if self.input_nc == 1:
             A_img = Image.open(A_path).convert('L')
@@ -90,7 +95,7 @@ class UnalignedDataset(BaseDataset):
         noise = self.transform_A(noise_img)
         patchnoiseA = self.transform_A(patchnoiseA_img)
 
-        return {'A': A, 'B': B, 'noise':noise, 'A_paths': A_path, 'B_paths': B_path, 'noise_paths': noise_path, 'patchnoiseA':patchnoiseA}
+        return {'A': A, 'B': B, 'noise':noise, 'A_paths': A_path, 'B_paths': B_path, 'noise_paths': noise_path, 'patchnoiseA':patchnoiseA, 'ref_image':ref_img}
 
     def __len__(self):
         """Return the total number of images in the dataset.

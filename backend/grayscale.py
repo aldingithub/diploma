@@ -48,7 +48,7 @@ def run_convert(name):
         opt.crop_size = 128
         opt.results_dir = './results/'
         opt.epoch = 700
-        opt.dataroot = './test'
+        opt.dataroot = './dataroot/grayscale'
         opt.name = name
         dataset = create_dataset(opt)  # create a dataset given opt.dataset_mode and other options
         model = create_model(opt)      # create a model given opt.model and other options

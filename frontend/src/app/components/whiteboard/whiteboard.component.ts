@@ -148,6 +148,16 @@ export class WhiteboardComponent implements OnInit {
     }
   }
 
+  colorizeImage(): void {
+    this.loadSpinner = true;
+    this.apiService.colorizeImage()
+      .pipe(tap(() => this.loadSpinner = false))
+      .subscribe({
+        next: img => this.imageSource = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64,${img.base64Image}`),
+        error: err => console.log(err)
+      })
+  }
+
   private addWhiteBackground(): void {
     let whiteBoard = this.konvaService.brush({ x: 844, y: 470 }, 3000, white, 1.0)
     this.layer.add(whiteBoard)
