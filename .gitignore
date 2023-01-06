@@ -10,6 +10,10 @@
 
 /backend/__pycache__/*
 /backend/results/*
+/backend/dataroot/colorize/testA/*
+/backend/dataroot/colorize/testB/*
+/backend/dataroot/grayscale/testA/*
+/backend/dataroot/grayscale/testB/*
 *.py[cod]
 *$py.class
 

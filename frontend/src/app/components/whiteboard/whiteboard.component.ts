@@ -4,6 +4,7 @@ import { Layer } from 'konva/lib/Layer';
 import { Stage } from 'konva/lib/Stage';
 import { tap } from 'rxjs';
 import { black, brush, eraser, furniture, white } from '../../const';
+import { Image } from '../../models/image';
 import { BackendApiService } from '../../services/backend-api.service';
 import { KonvaService } from '../../services/konva.service';
 
@@ -18,6 +19,7 @@ export class WhiteboardComponent implements OnInit {
   file: File;
   loadSpinner = false;
   imageSource: SafeResourceUrl;
+  imageBase64: string;
   furniture = furniture;
   selectedFurniture = furniture[0];
   stageDraggable = false;
@@ -114,10 +116,10 @@ export class WhiteboardComponent implements OnInit {
     }
   }
 
-  downloadSketch(): void {
+  downloadImage(): void {
     const link = document.createElement('a');
-    link.download = 'sketch.png';
-    link.href = this.prepareSketch();
+    link.download = 'image.png';
+    link.href = this.imageBase64;
     link.click();
   }
 
@@ -153,7 +155,7 @@ export class WhiteboardComponent implements OnInit {
     this.apiService.colorizeImage()
       .pipe(tap(() => this.loadSpinner = false))
       .subscribe({
-        next: img => this.imageSource = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64,${img.base64Image}`),
+        next: img => this.onImageResponse(img),
         error: err => console.log(err)
       })
   }
@@ -168,7 +170,7 @@ export class WhiteboardComponent implements OnInit {
     this.apiService.convertSketchToImage(formData)
       .pipe(tap(() => this.loadSpinner = false))
       .subscribe({
-        next: img => this.imageSource = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64,${img.base64Image}`),
+        next: img => this.onImageResponse(img),
         error: err => console.log(err)
       })
   }
@@ -188,5 +190,10 @@ export class WhiteboardComponent implements OnInit {
       height: 400,
       width: 400
     });
+  }
+
+  private onImageResponse(img: Image): void {
+    this.imageSource = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64,${img.base64Image}`);
+    this.imageBase64 = `data:image/png;base64,${img.base64Image}`;
   }
 }
