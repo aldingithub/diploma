@@ -7,16 +7,16 @@ export const eraser = 'eraser';
 
 export const furniture: Furniture[] = [
     {
-        name: 'Sofa',
-        icon: 'fa-couch'
+        name: 'Kavč',
+        backendName: 'Sofa'
     },
     {
         name: 'Miza',
-        icon: 'fa-table-picnic'
+        backendName: 'Miza'
     },
     {
         name: 'Omara',
-        icon: 'fa-cabinet-filing'
+        backendName: 'Omara'
     }
 ];
 

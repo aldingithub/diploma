@@ -126,7 +126,7 @@ export class WhiteboardComponent implements OnInit {
   convertToImage(): void {
     const formData = new FormData();
     formData.append('image', this.prepareSketch());
-    formData.append('type', this.selectedFurniture.name);
+    formData.append('type', this.selectedFurniture.backendName);
     this.apiConvert(formData);
   }
 
