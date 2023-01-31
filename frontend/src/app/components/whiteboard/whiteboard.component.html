@@ -85,10 +85,21 @@
 <br>
 <div class="text-center d-flex justify-content-center">
    <div class="col-md-2">
-      <input class="form-control shadow"
+      <input class="d-none"
              accept="image/png, image/jpeg"
              type="file"
-             (change)="onUploadSketch($event)">
+             (change)="onUploadSketch($event)"
+             #file>
+
+      <button matTooltip="Naloži skico"
+              matTooltipPosition="above"
+              class="btn shadow border"
+              (click)="file.click()"
+              aria-label="Naloži skico">
+         <i class="fa fa-upload"
+            aria-hidden="true">
+         </i>&nbsp;Naloži skico
+      </button>
    </div>
    <div class="col-md-1">
       <i *ngIf="loadSpinner"
