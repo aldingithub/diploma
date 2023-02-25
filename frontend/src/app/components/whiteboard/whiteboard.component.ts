@@ -144,6 +144,7 @@ export class WhiteboardComponent implements OnInit {
     img.src = window.URL.createObjectURL(this.file);
 
     img.onload = () => {
+      this.addWhiteBackground();
       this.layer.add(this.konvaService.image(img));
       this.layer.draw();
       this.convertToImage();
