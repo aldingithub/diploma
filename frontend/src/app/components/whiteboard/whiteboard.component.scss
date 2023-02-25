@@ -1,4 +1,4 @@
-.white_board--controls > button {
+.white_board--controls>button {
   margin: 5px;
   display: flex;
   align-content: center;
@@ -9,8 +9,6 @@
 }
 
 .white_board--controls {
-  position: fixed;
-  display: flex;
   background-color: #ffffff;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -35,5 +33,3 @@ canvas {
 .default_cursor {
   cursor: default;
 }
-
-

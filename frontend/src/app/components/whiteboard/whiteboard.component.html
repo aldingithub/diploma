@@ -65,20 +65,22 @@
    </button>
 </div>
 
-<div class="text-center d-flex justify-content-center">
+<div class="d-flex justify-content-center row">
 
-   <div id="container"
-        class="border border-1 border-warning shadow"
-        style="height: 410px; width: 410px"
-        [ngClass]="getCursorClass()"></div>
+   <div class="col-md-6 text-end">
+      <div id="container"
+           class="border border-1 border-warning shadow float-end"
+           style="height: 410px; width: 410px"
+           [ngClass]="getCursorClass()"></div>
+   </div>
 
-   <br>
-   <div class="border border-1 border-warning shadow">
+
+   <div class="col-md-6 text-start">
       <img [src]="imageSource"
+           class="border border-1 border-warning shadow"
            alt="Image Source"
            *ngIf="imageSource"
-           height="400px"
-           width="400px">
+           style="height: 410px; width: 410px">
    </div>
 </div>
 
